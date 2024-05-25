@@ -1,10 +1,21 @@
 const express = require('express');
 const app = express();
+const cors = require('cors'); 
 
+app.use(cors());
+app.use((req, res, next) => {
+  res.setHeader('Content-Security-Policy', '');
+  next();
+});
 
-app.get('/', (req, res) => {
+app.get('/upload', (req, res) => {
     // Your code here
-    res.json({ message: 'Hello World!' });
+    const payload = req.body;
+    console.log("this is the payload", payload);
+    res.setHeader('Content-Security-Policy', "default-src 'self' http://localhost:3000");
+ 
+    res.json({ message: "Testing" });
+
   });
   
 
